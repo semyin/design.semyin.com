@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简约博客</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">简约博客</h1>
+            <div class="header-right">
+                <!-- <div class="search-container desktop-only">
+                    <input type="text" class="search-input" placeholder="搜索文章...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <button class="theme-toggle desktop-only" title="切换主题"></button> -->
+                <div class="mobile-actions mobile-only">
+                    <button class="search-toggle" title="搜索">🔍</button>
+                    <button class="theme-toggle" title="切换主题"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 搜索弹出层 -->
+    <div class="search-overlay">
+        <div class="search-modal">
+            <div class="search-modal-header">
+                <input type="text" class="search-modal-input" placeholder="搜索文章..." autofocus>
+                <button class="search-close">✕</button>
+            </div>
+            <div class="search-results">
+                <div class="search-results-content">
+                    <!-- 搜索结果将显示在这里 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-links">
+                <a href="#" class="nav-link active">首页</a>
+                <a href="#" class="nav-link">分类</a>
+                <a href="#" class="nav-link">标签</a>
+                <a href="#" class="nav-link">RSS</a>
+                <a href="#" class="nav-link">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <section class="posts">
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">如何构建一个简约的静态博客</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-19</time>
+                        <span class="post-tags">
+                            <span class="tag">技术</span>
+                            <span class="tag">前端</span>
+                        </span>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">极简设计的美学原则</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-15</time>
+                        <span class="post-tags">
+                            <span class="tag">设计</span>
+                            <span class="tag">UI/UX</span>
+                        </span>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">数字时代的深度思考</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-10</time>
+                        <span class="post-tags">
+                            <span class="tag">生活</span>
+                            <span class="tag">思考</span>
+                        </span>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">JavaScript异步编程最佳实践</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-05</time>
+                        <span class="post-tags">
+                            <span class="tag">技术</span>
+                            <span class="tag">JavaScript</span>
+                        </span>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">CSS Grid 完全指南</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-01</time>
+                        <span class="post-tags">
+                            <span class="tag">技术</span>
+                            <span class="tag">CSS</span>
+                        </span>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <h3 class="post-title">
+                        <a href="post.html" class="post-link">CSS Grid 完全指南</a>
+                    </h3>
+                    <div class="post-meta">
+                        <time class="post-date">2024-08-01</time>
+                        <span class="post-tags">
+                            <span class="tag">技术</span>
+                            <span class="tag">CSS</span>
+                        </span>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">&copy; 2024 简约博客. 专注内容，简约至上.</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" title="返回顶部">TOP</button>
+</body>
+</html>

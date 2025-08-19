@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何构建一个简约的静态博客 - 简约博客</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="site-title">简约博客</h1>
+            <div class="header-right">
+                <!-- <div class="search-container desktop-only">
+                    <input type="text" class="search-input" placeholder="搜索文章...">
+                    <button class="search-btn">🔍</button>
+                </div> -->
+                <!-- <button class="theme-toggle desktop-only" title="切换主题"></button> -->
+                <div class="mobile-actions mobile-only">
+                    <button class="search-toggle" title="搜索">🔍</button>
+                    <button class="theme-toggle" title="切换主题"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 搜索弹出层 -->
+    <div class="search-overlay">
+        <div class="search-modal">
+            <div class="search-modal-header">
+                <input type="text" class="search-modal-input" placeholder="搜索文章..." autofocus>
+                <button class="search-close">✕</button>
+            </div>
+            <div class="search-results">
+                <div class="search-results-content">
+                    <!-- 搜索结果将显示在这里 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="main-nav">
+        <div class="container">
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="#" class="nav-link">分类</a>
+                <a href="#" class="nav-link">标签</a>
+                <a href="#" class="nav-link">RSS</a>
+                <a href="#" class="nav-link">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <article class="article">
+                <header class="article-header">
+                    <h1 class="article-title">如何构建一个简约的静态博客</h1>
+                    <div class="article-meta">
+                        <time class="post-date">2024年8月19日</time>
+                        <span class="post-category">技术</span>
+                    </div>
+                </header>
+
+                <div class="article-content">
+                    <p>在这个信息过载的时代，简约设计正变得越来越重要。一个简洁的博客不仅能够让读者专注于内容本身，还能提供更好的阅读体验。今天，我们将探讨如何使用纯HTML和CSS创建一个优雅的静态博客。</p>
+
+                    <h2>为什么选择静态博客？</h2>
+
+                    <p>静态博客有许多优势：</p>
+
+                    <ul>
+                        <li><strong>加载速度快</strong> - 没有数据库查询和服务器端处理</li>
+                        <li><strong>安全性高</strong> - 没有动态内容意味着更少的安全漏洞</li>
+                        <li><strong>维护简单</strong> - 只需要托管静态文件</li>
+                        <li><strong>成本低廉</strong> - 可以使用免费的静态网站托管服务</li>
+                    </ul>
+
+                    <h2>设计原则</h2>
+
+                    <p>在设计这个博客时，我们遵循了几个核心原则：</p>
+
+                    <h3>1. 内容为王</h3>
+                    <p>设计应该服务于内容，而不是喧宾夺主。我们使用了大量的留白和简洁的排版来突出文章内容。</p>
+
+                    <h3>2. 可读性优先</h3>
+                    <p>选择了易于阅读的字体和合适的行高，确保用户能够舒适地阅读长篇文章。</p>
+
+                    <blockquote>
+                        "简约并不意味着缺乏，而是去除不必要的装饰，专注于本质。"
+                    </blockquote>
+
+                    <h3>3. 响应式设计</h3>
+                    <p>确保博客在各种设备上都能良好显示，从桌面电脑到手机都有优化的体验。</p>
+
+                    <h2>技术实现</h2>
+
+                    <p>这个博客使用了以下技术栈：</p>
+
+                    <ul>
+                        <li>HTML5 语义化标签</li>
+                        <li>CSS3 Flexbox 和 Grid 布局</li>
+                        <li>移动优先的响应式设计</li>
+                        <li>CSS 自定义属性（变量）</li>
+                    </ul>
+
+                    <p>关键的CSS代码示例：</p>
+
+                    <pre><code>.post-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    transition: box-shadow 0.2s ease;
+}
+
+.post-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}</code></pre>
+
+                    <h2>性能优化</h2>
+
+                    <p>为了确保最佳的性能，我们采用了以下优化策略：</p>
+
+                    <ul>
+                        <li>最小化CSS和HTML</li>
+                        <li>使用系统字体栈</li>
+                        <li>优化图片大小和格式</li>
+                        <li>使用CSS而非JavaScript实现交互效果</li>
+                    </ul>
+
+                    <h2>总结</h2>
+
+                    <p>构建一个简约的静态博客并不复杂，关键是要专注于内容和用户体验。通过合理的设计和优化，我们可以创建一个既美观又实用的博客平台。</p>
+
+                    <p>这种方法特别适合那些想要完全控制自己网站外观和性能的开发者。虽然功能可能不如动态博客系统丰富，但简洁性和性能优势往往更加重要。</p>
+
+                    <p>希望这篇文章对你构建自己的静态博客有所帮助。记住，最好的设计往往是最简单的设计。</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">&copy; 2024 简约博客. 专注内容，简约至上.</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" title="返回顶部">TOP</button>
+</body>
+</html>
