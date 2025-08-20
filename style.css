@@ -254,6 +254,93 @@ body {
     font-style: italic;
 }
 
+/* 搜索历史样式 */
+.search-history {
+    border-bottom: 1px solid var(--border-color);
+    display: none;
+}
+
+.search-history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem 0.5rem;
+}
+
+.search-history-title {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.search-history-clear {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.search-history-clear:hover {
+    background: var(--bg-secondary);
+    color: var(--accent-hover);
+}
+
+.search-history-content {
+    padding: 0 1.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.search-history-item {
+    display: inline-flex;
+    align-items: center;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    padding-right: 1.5rem;
+}
+
+.search-history-item:hover {
+    background: var(--accent-color);
+    color: white;
+}
+
+.search-history-delete {
+    position: absolute;
+    right: 0.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: currentColor;
+    font-size: 0.9rem;
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    opacity: 0.7;
+}
+
+.search-history-delete:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.2);
+}
+
 /* 搜索样式 */
 .search-container {
     display: flex;

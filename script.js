@@ -73,6 +73,108 @@ class ThemeManager {
         });
     }
 
+    // 搜索历史管理
+    getSearchHistory() {
+        try {
+            const history = localStorage.getItem('searchHistory');
+            return history ? JSON.parse(history) : [];
+        } catch (e) {
+            return [];
+        }
+    }
+
+    addToSearchHistory(query) {
+        if (!query.trim()) return;
+        
+        let history = this.getSearchHistory();
+        
+        // 如果已存在，先移除
+        history = history.filter(item => item.query !== query.trim());
+        
+        // 添加到开头
+        history.unshift({
+            query: query.trim(),
+            timestamp: Date.now()
+        });
+        
+        // 保持最多10个记录
+        history = history.slice(0, 10);
+        
+        try {
+            localStorage.setItem('searchHistory', JSON.stringify(history));
+        } catch (e) {
+            console.error('保存搜索历史失败:', e);
+        }
+        
+        // 更新历史记录显示
+        this.updateSearchHistoryDisplay();
+    }
+
+    clearSearchHistory() {
+        try {
+            localStorage.removeItem('searchHistory');
+            this.updateSearchHistoryDisplay();
+        } catch (e) {
+            console.error('清除搜索历史失败:', e);
+        }
+    }
+
+    updateSearchHistoryDisplay() {
+        const historyContent = document.querySelector('.search-history-content');
+        const historySection = document.querySelector('.search-history');
+        
+        if (!historyContent || !historySection) return;
+        
+        const history = this.getSearchHistory();
+        
+        if (history.length === 0) {
+            historySection.style.display = 'none';
+            return;
+        }
+        
+        historySection.style.display = 'block';
+        historyContent.innerHTML = history.map(item => `
+            <span class="search-history-item" data-query="${item.query}">
+                ${item.query}
+                <button class="search-history-delete" data-query="${item.query}">×</button>
+            </span>
+        `).join('');
+        
+        // 添加点击事件
+        historyContent.querySelectorAll('.search-history-item').forEach(item => {
+            const query = item.dataset.query;
+            item.addEventListener('click', (e) => {
+                if (e.target.classList.contains('search-history-delete')) {
+                    e.stopPropagation();
+                    this.removeFromSearchHistory(query);
+                } else {
+                    this.searchFromHistory(query);
+                }
+            });
+        });
+    }
+
+    removeFromSearchHistory(query) {
+        let history = this.getSearchHistory();
+        history = history.filter(item => item.query !== query);
+        
+        try {
+            localStorage.setItem('searchHistory', JSON.stringify(history));
+            this.updateSearchHistoryDisplay();
+        } catch (e) {
+            console.error('删除搜索历史失败:', e);
+        }
+    }
+
+    searchFromHistory(query) {
+        const searchModalInput = document.querySelector('.search-modal-input');
+        if (searchModalInput) {
+            searchModalInput.value = query;
+            this.performModalSearch(query);
+            this.addToSearchHistory(query);
+        }
+    }
+
     // 搜索弹出层功能
     initSearchModal() {
         const searchOverlay = document.querySelector('.search-overlay');
@@ -107,9 +209,15 @@ class ThemeManager {
             }
         });
 
+        // 清除历史记录按钮
+        const searchHistoryClear = document.querySelector('.search-history-clear');
+        searchHistoryClear?.addEventListener('click', () => this.clearSearchHistory());
+
         searchModalInput?.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && e.target.value.trim()) {
-                this.performModalSearch(e.target.value);
+                const query = e.target.value.trim();
+                this.addToSearchHistory(query);
+                this.performModalSearch(query);
             }
         });
     }
@@ -119,8 +227,16 @@ class ThemeManager {
         const searchModalInput = document.querySelector('.search-modal-input');
         
         if (searchOverlay) {
+            // 获取滚动条宽度
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+            
             searchOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            // 添加右侧padding补偿滚动条宽度，防止页面抖动
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
+            
+            // 显示搜索历史
+            this.updateSearchHistoryDisplay();
             
             // 聚焦搜索框
             setTimeout(() => {
@@ -136,6 +252,8 @@ class ThemeManager {
         if (searchOverlay) {
             searchOverlay.classList.remove('active');
             document.body.style.overflow = '';
+            // 恢复padding
+            document.body.style.paddingRight = '';
             
             // 清空搜索
             if (searchModalInput) {
@@ -203,7 +321,7 @@ class ThemeManager {
 
             const tagsHTML = result.tags.map(tag => {
                 const highlightedTag = tag.includes(query.toLowerCase()) 
-                    ? `<span style="background: var(--accent-color); color: white; padding: 0.1rem 0.4rem; border-radius: 8px;">${tag}</span>`
+                    ? `<span class="tag" style="background: var(--accent-color); color: white;">${tag}</span>`
                     : `<span class="tag">${tag}</span>`;
                 return highlightedTag;
             }).join(' ');
