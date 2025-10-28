@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    header,
+    main,
+    footer {
+      width: 800px;
+      margin: 20px auto;
+    }
+
+    header {
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    header ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    header ul li {
+      margin-right: 20px;
+    }
+
+    header ul li a {
+      text-decoration: none;
+    }
+
+    header ul li a:visited {
+      color: #0070f3;
+    }
+
+    .tool-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .tool-box button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tool-box button img {
+      width: 25px;
+      height: 25px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <ul>
+      <li><a href="">Profile</a></li>
+      <li><a href="">Journal</a></li>
+      <li><a href="">Collections</a></li>
+      <li><a href="">Bookmarks</a></li>
+      <li><a href="">Discovery</a></li>
+    </ul>
+    <div class="tool-box">
+      <!-- <button><img src="./assets/svg/search.svg" alt=""></button> -->
+      <button><img src="./assets/svg/日间模式.svg" alt=""></button>
+    </div>
+  </header>
+
+  <main>
+    <h1>Hello World</h1>
+    <div class="list">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+
+</html>
