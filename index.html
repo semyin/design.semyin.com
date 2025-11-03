@@ -5,62 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="./assets/css/common.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    header,
-    main,
-    footer {
-      width: 800px;
-      margin: 20px auto;
-    }
-
-    header {
-
-      display: flex;
-      justify-content: space-between;
-    }
-
-    header ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-    }
-
-    header ul li {
-      margin-right: 20px;
-    }
-
-    header ul li a {
-      text-decoration: none;
-    }
-
-    header ul li a:visited {
-      color: #0070f3;
-    }
-
-    .tool-box {
-      display: flex;
-      align-items: center;
-    }
-
-    .tool-box button {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tool-box button img {
-      width: 25px;
-      height: 25px;
-    }
-
     main .list ul {
       list-style: none;
       margin-top: 20px;
@@ -86,48 +32,21 @@
     main .list ul li a:visited {
       color: #0070f3;
     }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 40px;
-    }
-    
-    footer button {
-      border: none;
-      background-color: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
   </style>
+
 </head>
 
 <body>
-  <header>
-    <ul>
-      <li><a href="">Profile</a></li>
-      <li><a href="">Journal</a></li>
-      <li><a href="">Collections</a></li>
-      <li><a href="">Bookmarks</a></li>
-      <li><a href="">Discovery</a></li>
-    </ul>
-    <div class="tool-box">
-      <!-- <button><img src="./assets/svg/search.svg" alt=""></button> -->
-      <button><img src="./assets/svg/日间模式.svg" alt=""></button>
-    </div>
-  </header>
-
+  <header></header>
   <main>
     <h1>Hello World</h1>
     <div class="list">
       <ul>
         <li><time>2025-01-01</time><a href="">全栈开发实战：使用 React, Node.js 和 Express 构建一个实时聊天应用</a></li>
-        <li><time>2025-01-02</time><a href="">后端语言大比拼：Java (Spring Boot) vs. Python (Django) vs. Node.js (Express) 我该如何选择？</a></li>
-        <li><time>2025-01-03</time><a href="">API 设计的艺术：如何为你的 JavaScript 前端设计优雅的 RESTful API (以 Node.js 和 Spring Boot 为例)</a></li>
+        <li><time>2025-01-02</time><a href="">后端语言大比拼：Java (Spring Boot) vs. Python (Django) vs. Node.js (Express)
+            我该如何选择？</a></li>
+        <li><time>2025-01-03</time><a href="">API 设计的艺术：如何为你的 JavaScript 前端设计优雅的 RESTful API (以 Node.js 和 Spring Boot
+            为例)</a></li>
         <li><time>2025-01-04</time><a href="">Python 异步编程入门：从 asyncio 基础到实战爬虫应用</a></li>
         <li><time>2025-01-05</time><a href="">数据科学项目实战：用 Python 和 Pandas 清洗并分析一份真实数据集</a></li>
         <li><time>2025-01-06</time><a href="">深入理解 Spring Boot 自动配置原理，告别“知其然不知其所以然”</a></li>
@@ -136,7 +55,7 @@
         <li><time>2025-01-09</time><a href="">React Hooks 全面解析：useState, useEffect 及自定义 Hooks 使用详解</a></li>
         <li><time>2025-01-10</time><a href="">2024年 React 状态管理方案选型：Redux Toolkit, Zustand, Recoil 还是原生 Context？</a></li>
         <li><time>2025-01-11</time><a href="">React 性能优化：memo, useMemo 和 useCallback 的正确使用场景</a></li>
-        <li><time>2025-01-12</time><a href="">从零到一：使用 Spring Boot + React + Docker 部署你的个人博客系统</a></li> 
+        <li><time>2025-01-12</time><a href="">从零到一：使用 Spring Boot + React + Docker 部署你的个人博客系统</a></li>
         <li><time>2025-01-13</time><a href="">编写优雅的 Pythonic 代码：超越基础语法的8个必知技巧</a></li>
         <li><time>2025-01-14</time><a href="">Node.js 性能优化：编写高并发应用的 7 个最佳实践</a></li>
         <li><time>2025-01-15</time><a href="">MySQL转Drizzle数据库架构</a></li>
@@ -144,16 +63,8 @@
       </ul>
     </div>
   </main>
-  <footer>
-    <div>
-      <p>© 2025 All rights reserved.</p>
-    <p>Site has been running for 3 days.</p>
-    <p>Theme sonic Powered by Supabase and cloudflare</p>
-    </div>
-    <div>
-      <button>🚀 Go Top</button>
-    </div>
-  </footer>
+  <footer></footer>
+  <script src="./js/components.js"></script>
 </body>
 
 </html>

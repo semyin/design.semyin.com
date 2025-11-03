@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <style>
+    main {
+      margin: 40px auto;
+    }
+
+    main h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .categories-grid {
+      width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .category-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+
+    .category-card.active {
+      border-color: var(--accent-color);
+      background: var(--accent-color);
+      color: white;
+    }
+
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .category-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    .category-card.active .category-name {
+      color: white;
+    }
+
+    .category-description {
+      color: var(--text-secondary);
+      margin-bottom: 0.8rem;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    .category-card.active .category-description {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .category-count {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .category-card.active .category-count {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .category-posts-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .category-posts-header h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .category-posts-header p {
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <header></header>
+  <main>
+    <h1>Category</h1>
+  </main>
+  <section class="categories-grid">
+    <div class="category-card" data-category="技术">
+      <div class="category-icon">💻</div>
+      <h3 class="category-name">技术</h3>
+      <p class="category-description">编程、开发、技术分享</p>
+      <div class="category-count">3 篇文章</div>
+    </div>
+
+    <div class="category-card" data-category="设计">
+      <div class="category-icon">🎨</div>
+      <h3 class="category-name">设计</h3>
+      <p class="category-description">UI/UX、视觉设计</p>
+      <div class="category-count">1 篇文章</div>
+    </div>
+
+    <div class="category-card" data-category="生活">
+      <div class="category-icon">🌱</div>
+      <h3 class="category-name">生活</h3>
+      <p class="category-description">生活感悟、个人思考</p>
+      <div class="category-count">1 篇文章</div>
+    </div>
+
+    <div class="category-card" data-category="学习">
+      <div class="category-icon">📚</div>
+      <h3 class="category-name">学习</h3>
+      <p class="category-description">学习笔记、知识分享</p>
+      <div class="category-count">0 篇文章</div>
+    </div>
+  </section>
+  <footer></footer>
+  <script src="./js/components.js"></script>
+</body>
+
+</html>
