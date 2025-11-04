@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 
 <head>
@@ -20,16 +20,19 @@
       font-size: 2rem;
       font-weight: 600;
       color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .page-description {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
     }
 
     .tag-switcher {
-      margin-top: 24px;
-    }
-
-    .tag-filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 0.8rem;
+      align-content: flex-start;
     }
 
     .tag-input {
@@ -38,54 +41,64 @@
       pointer-events: none;
     }
 
-    .tag-input + .tag-button {
+    .tag-item {
+      order: 1;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
-      padding: 4px 12px;
-      border-radius: 12px;
-      border: 1px solid transparent;
+      gap: 0.3rem;
       background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
       font-size: 0.85rem;
       font-weight: 500;
-      color: var(--tag-text);
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
     }
 
-    .tag-input + .tag-button .tag-count {
-      font-size: 0.72rem;
+    .tag-count {
+      background: rgba(0, 0, 0, 0.04);
       color: var(--tag-text);
+      padding: 0.1rem 0.4rem;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      min-width: 16px;
+      text-align: center;
+      font-weight: 600;
     }
 
-    .tag-input + .tag-button:hover,
-    .tag-input:focus-visible + .tag-button {
+    .tag-item:hover {
       background: var(--accent-color);
       color: #ffffff;
-      box-shadow: 0 6px 14px rgba(0, 102, 204, 0.25);
+      transform: translateY(-1px);
     }
 
-    .tag-input + .tag-button:hover .tag-count,
-    .tag-input:focus-visible + .tag-button .tag-count {
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .tag-input:checked + .tag-button {
-      background: var(--accent-color);
-      color: #ffffff;
-      box-shadow: 0 6px 14px rgba(0, 102, 204, 0.25);
-    }
-
-    .tag-input:checked + .tag-button .tag-count {
+    .tag-item:hover .tag-count {
+      background: rgba(255, 255, 255, 0.3);
       color: rgba(255, 255, 255, 0.85);
     }
 
-    .tag-panels {
-      margin-top: 40px;
+    .tag-input:checked + .tag-item {
+      background: var(--accent-color);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .tag-input:checked + .tag-item .tag-count {
+      background: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .tag-panel {
+      order: 2;
+      flex: 1 0 100%;
       display: none;
+      margin-top: 24px;
+    }
+
+    .tag-input:checked + .tag-item + .tag-panel {
+      display: block;
     }
 
     .tag-posts-header {
@@ -98,68 +111,40 @@
       font-size: 1.3rem;
       font-weight: 600;
       color: var(--text-primary);
+      margin-bottom: 6px;
     }
 
     .tag-posts-header p {
-      margin-top: 6px;
       color: var(--text-secondary);
       font-size: 0.9rem;
     }
 
     .post-list {
       list-style: none;
+      margin-top: 20px;
       padding: 0;
-      margin: 0;
     }
 
     .post-list li {
+      margin-bottom: 20px;
       display: flex;
       align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .post-list li:last-child {
-      margin-bottom: 0;
     }
 
     .post-list time {
       flex-shrink: 0;
       font-size: 14px;
       color: var(--text-secondary);
-      min-width: 88px;
+      margin-right: 10px;
     }
 
     .post-list a {
       text-decoration: none;
-      color: var(--text-primary);
+      color: #0070f3;
     }
 
     .post-list a:hover {
       color: var(--accent-color);
-    }
-
-    .tag-empty {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-    }
-
-    #tag-all:checked ~ .tag-panels [data-tag="tag-all"],
-    #tag-javascript:checked ~ .tag-panels [data-tag="tag-javascript"],
-    #tag-react:checked ~ .tag-panels [data-tag="tag-react"],
-    #tag-node:checked ~ .tag-panels [data-tag="tag-node"],
-    #tag-async:checked ~ .tag-panels [data-tag="tag-async"],
-    #tag-performance:checked ~ .tag-panels [data-tag="tag-performance"],
-    #tag-design:checked ~ .tag-panels [data-tag="tag-design"],
-    #tag-ui:checked ~ .tag-panels [data-tag="tag-ui"],
-    #tag-system:checked ~ .tag-panels [data-tag="tag-system"],
-    #tag-ios:checked ~ .tag-panels [data-tag="tag-ios"],
-    #tag-webview:checked ~ .tag-panels [data-tag="tag-webview"],
-    #tag-debug:checked ~ .tag-panels [data-tag="tag-debug"],
-    #tag-python:checked ~ .tag-panels [data-tag="tag-python"],
-    #tag-data:checked ~ .tag-panels [data-tag="tag-data"] {
-      display: block;
     }
   </style>
 </head>
@@ -167,272 +152,130 @@
 <body>
   <header></header>
   <main>
-    <h1>所有标签</h1>
-    <div class="tag-switcher">
-      <div class="tag-filters">
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-all" checked>
-        <label class="tag-button" for="tag-all"><span>全部</span><span class="tag-count">6</span></label>
+    <h1>标签</h1>
+    <p class="page-description">按标签类型浏览文章</p>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-javascript">
-        <label class="tag-button" for="tag-javascript"><span>JavaScript</span><span class="tag-count">3</span></label>
+    <section class="tag-switcher">
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-all" checked>
+      <label class="tag-item" for="tag-all"><span class="tag-name">全部</span><span class="tag-count">7</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>全部文章</h2>
+          <p>7 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-react">
-        <label class="tag-button" for="tag-react"><span>React</span><span class="tag-count">2</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-tech">
+      <label class="tag-item" for="tag-tech"><span class="tag-name">技术</span><span class="tag-count">5</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：技术</h2>
+          <p>5 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-node">
-        <label class="tag-button" for="tag-node"><span>Node.js</span><span class="tag-count">2</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-frontend">
+      <label class="tag-item" for="tag-frontend"><span class="tag-name">前端</span><span class="tag-count">2</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：前端</h2>
+          <p>2 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-async">
-        <label class="tag-button" for="tag-async"><span>Async</span><span class="tag-count">1</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-javascript">
+      <label class="tag-item" for="tag-javascript"><span class="tag-name">JavaScript</span><span class="tag-count">2</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：JavaScript</h2>
+          <p>2 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-performance">
-        <label class="tag-button" for="tag-performance"><span>Performance</span><span class="tag-count">1</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-css">
+      <label class="tag-item" for="tag-css"><span class="tag-name">CSS</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：CSS</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-design">
-        <label class="tag-button" for="tag-design"><span>Design</span><span class="tag-count">1</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-design">
+      <label class="tag-item" for="tag-design"><span class="tag-name">设计</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：设计</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-ui">
-        <label class="tag-button" for="tag-ui"><span>UI</span><span class="tag-count">1</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-uiux">
+      <label class="tag-item" for="tag-uiux"><span class="tag-name">UI/UX</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：UI/UX</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-system">
-        <label class="tag-button" for="tag-system"><span>System</span><span class="tag-count">1</span></label>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-life">
+      <label class="tag-item" for="tag-life"><span class="tag-name">生活</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：生活</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
 
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-ios">
-        <label class="tag-button" for="tag-ios"><span>iOS</span><span class="tag-count">1</span></label>
-
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-webview">
-        <label class="tag-button" for="tag-webview"><span>WebView</span><span class="tag-count">1</span></label>
-
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-debug">
-        <label class="tag-button" for="tag-debug"><span>Debug</span><span class="tag-count">1</span></label>
-
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-python">
-        <label class="tag-button" for="tag-python"><span>Python</span><span class="tag-count">1</span></label>
-
-        <input class="tag-input" type="radio" name="tag-filter" id="tag-data">
-        <label class="tag-button" for="tag-data"><span>Data</span><span class="tag-count">1</span></label>
-      </div>
-
-      <div class="tag-panels">
-        <section class="tag-panel" data-tag="tag-all">
-          <div class="tag-posts-header">
-            <h2>全部文章</h2>
-            <p>当前共收录 6 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-01">2025-01-01</time>
-              <a href="#">全栈开发实战：使用 React、Node.js 和 Express 构建实时聊天应用</a>
-            </li>
-            <li>
-              <time datetime="2025-01-08">2025-01-08</time>
-              <a href="#">告别回调地狱：掌握 Node.js 的 Promise 与 Async/Await</a>
-            </li>
-            <li>
-              <time datetime="2025-01-11">2025-01-11</time>
-              <a href="#">React 性能优化：memo、useMemo 与 useCallback 的使用场景</a>
-            </li>
-            <li>
-              <time datetime="2025-02-01">2025-02-01</time>
-              <a href="#">设计系统 2.0：从组件到视觉语言的落地实践</a>
-            </li>
-            <li>
-              <time datetime="2025-01-16">2025-01-16</time>
-              <a href="#">iOS 内嵌 H5 解析 JSON 的那些坑</a>
-            </li>
-            <li>
-              <time datetime="2025-01-05">2025-01-05</time>
-              <a href="#">数据科学项目实战：用 Python 和 Pandas 清洗并分析真实数据集</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-javascript">
-          <div class="tag-posts-header">
-            <h2>标签：JavaScript</h2>
-            <p>3 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-01">2025-01-01</time>
-              <a href="#">全栈开发实战：使用 React、Node.js 和 Express 构建实时聊天应用</a>
-            </li>
-            <li>
-              <time datetime="2025-01-08">2025-01-08</time>
-              <a href="#">告别回调地狱：掌握 Node.js 的 Promise 与 Async/Await</a>
-            </li>
-            <li>
-              <time datetime="2025-01-11">2025-01-11</time>
-              <a href="#">React 性能优化：memo、useMemo 与 useCallback 的使用场景</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-react">
-          <div class="tag-posts-header">
-            <h2>标签：React</h2>
-            <p>2 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-01">2025-01-01</time>
-              <a href="#">全栈开发实战：使用 React、Node.js 和 Express 构建实时聊天应用</a>
-            </li>
-            <li>
-              <time datetime="2025-01-11">2025-01-11</time>
-              <a href="#">React 性能优化：memo、useMemo 与 useCallback 的使用场景</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-node">
-          <div class="tag-posts-header">
-            <h2>标签：Node.js</h2>
-            <p>2 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-01">2025-01-01</time>
-              <a href="#">全栈开发实战：使用 React、Node.js 和 Express 构建实时聊天应用</a>
-            </li>
-            <li>
-              <time datetime="2025-01-08">2025-01-08</time>
-              <a href="#">告别回调地狱：掌握 Node.js 的 Promise 与 Async/Await</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-async">
-          <div class="tag-posts-header">
-            <h2>标签：Async</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-08">2025-01-08</time>
-              <a href="#">告别回调地狱：掌握 Node.js 的 Promise 与 Async/Await</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-performance">
-          <div class="tag-posts-header">
-            <h2>标签：Performance</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-11">2025-01-11</time>
-              <a href="#">React 性能优化：memo、useMemo 与 useCallback 的使用场景</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-design">
-          <div class="tag-posts-header">
-            <h2>标签：Design</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-02-01">2025-02-01</time>
-              <a href="#">设计系统 2.0：从组件到视觉语言的落地实践</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-ui">
-          <div class="tag-posts-header">
-            <h2>标签：UI</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-02-01">2025-02-01</time>
-              <a href="#">设计系统 2.0：从组件到视觉语言的落地实践</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-system">
-          <div class="tag-posts-header">
-            <h2>标签：System</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-02-01">2025-02-01</time>
-              <a href="#">设计系统 2.0：从组件到视觉语言的落地实践</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-ios">
-          <div class="tag-posts-header">
-            <h2>标签：iOS</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-16">2025-01-16</time>
-              <a href="#">iOS 内嵌 H5 解析 JSON 的那些坑</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-webview">
-          <div class="tag-posts-header">
-            <h2>标签：WebView</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-16">2025-01-16</time>
-              <a href="#">iOS 内嵌 H5 解析 JSON 的那些坑</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-debug">
-          <div class="tag-posts-header">
-            <h2>标签：Debug</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-16">2025-01-16</time>
-              <a href="#">iOS 内嵌 H5 解析 JSON 的那些坑</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-python">
-          <div class="tag-posts-header">
-            <h2>标签：Python</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-05">2025-01-05</time>
-              <a href="#">数据科学项目实战：用 Python 和 Pandas 清洗并分析真实数据集</a>
-            </li>
-          </ul>
-        </section>
-
-        <section class="tag-panel" data-tag="tag-data">
-          <div class="tag-posts-header">
-            <h2>标签：Data</h2>
-            <p>1 篇文章</p>
-          </div>
-          <ul class="post-list">
-            <li>
-              <time datetime="2025-01-05">2025-01-05</time>
-              <a href="#">数据科学项目实战：用 Python 和 Pandas 清洗并分析真实数据集</a>
-            </li>
-          </ul>
-        </section>
-      </div>
-    </div>
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-thinking">
+      <label class="tag-item" for="tag-thinking"><span class="tag-name">思考</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：思考</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
+    </section>
   </main>
   <footer></footer>
   <script src="./js/components.js"></script>
