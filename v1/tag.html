@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>所有标签 - Semyin</title>
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <style>
+    :root {
+      --tag-bg: #f0f0f0;
+      --tag-text: #666666;
+    }
+
+    main {
+      margin-top: 40px;
+    }
+
+    main h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .page-description {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .tag-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-content: flex-start;
+    }
+
+    .tag-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .tag-item {
+      order: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tag-count {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--tag-text);
+      padding: 0.1rem 0.4rem;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      min-width: 16px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .tag-item:hover {
+      background: var(--accent-color);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .tag-item:hover .tag-count {
+      background: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .tag-input:checked + .tag-item {
+      background: var(--accent-color);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .tag-input:checked + .tag-item .tag-count {
+      background: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tag-panel {
+      order: 2;
+      flex: 1 0 100%;
+      display: none;
+      margin-top: 24px;
+    }
+
+    .tag-input:checked + .tag-item + .tag-panel {
+      display: block;
+    }
+
+    .tag-posts-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tag-posts-header h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .tag-posts-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .post-list {
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+
+    .post-list li {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .post-list time {
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-right: 10px;
+    }
+
+    .post-list a {
+      text-decoration: none;
+      color: #0070f3;
+    }
+
+    .post-list a:hover {
+      color: var(--accent-color);
+    }
+  </style>
+</head>
+
+<body>
+  <header></header>
+  <main>
+    <h1>标签</h1>
+    <p class="page-description">按标签类型浏览文章</p>
+
+    <section class="tag-switcher">
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-all" checked>
+      <label class="tag-item" for="tag-all"><span class="tag-name">全部</span><span class="tag-count">7</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>全部文章</h2>
+          <p>7 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-tech">
+      <label class="tag-item" for="tag-tech"><span class="tag-name">技术</span><span class="tag-count">5</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：技术</h2>
+          <p>5 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-frontend">
+      <label class="tag-item" for="tag-frontend"><span class="tag-name">前端</span><span class="tag-count">2</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：前端</h2>
+          <p>2 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-19">2024-08-19</time><a href="#">如何构建一个简约的静态博客</a></li>
+          <li><time datetime="2024-07-22">2024-07-22</time><a href="#">前端工程化入门指南</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-javascript">
+      <label class="tag-item" for="tag-javascript"><span class="tag-name">JavaScript</span><span class="tag-count">2</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：JavaScript</h2>
+          <p>2 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-05">2024-08-05</time><a href="#">JavaScript 异步编程最佳实践</a></li>
+          <li><time datetime="2024-07-10">2024-07-10</time><a href="#">TypeScript 项目最佳实践</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-css">
+      <label class="tag-item" for="tag-css"><span class="tag-name">CSS</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：CSS</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-01">2024-08-01</time><a href="#">CSS Grid 完全指南</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-design">
+      <label class="tag-item" for="tag-design"><span class="tag-name">设计</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：设计</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-uiux">
+      <label class="tag-item" for="tag-uiux"><span class="tag-name">UI/UX</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：UI/UX</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-15">2024-08-15</time><a href="#">极简设计的美学原则</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-life">
+      <label class="tag-item" for="tag-life"><span class="tag-name">生活</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：生活</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
+
+      <input class="tag-input" type="radio" name="tag-filter" id="tag-thinking">
+      <label class="tag-item" for="tag-thinking"><span class="tag-name">思考</span><span class="tag-count">1</span></label>
+      <section class="tag-panel">
+        <div class="tag-posts-header">
+          <h2>标签：思考</h2>
+          <p>1 篇文章</p>
+        </div>
+        <ul class="post-list">
+          <li><time datetime="2024-08-10">2024-08-10</time><a href="#">数字时代的深度思考</a></li>
+        </ul>
+      </section>
+    </section>
+  </main>
+  <footer></footer>
+  <script src="./js/components.js"></script>
+</body>
+
+</html>

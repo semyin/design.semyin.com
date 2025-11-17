@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>所有分类 - Semyin</title>
+  <link rel="stylesheet" href="./assets/css/common.css">
+  <style>
+    main {
+      margin-top: 40px;
+    }
+
+    main h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    main .list ul {
+      list-style: none;
+      margin-top: 24px;
+      padding: 0;
+    }
+
+    main .list li {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    main .list li:last-child {
+      border-bottom: none;
+    }
+
+    .category-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      padding: 16px 12px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .category-link:hover .category-name,
+    .category-link:focus-visible .category-name {
+      color: var(--accent-color);
+    }
+
+    .category-link:focus-visible {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 4px;
+    }
+
+    .category-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      margin-top: 2px;
+    }
+
+    .category-content {
+      flex: 1;
+    }
+
+    .category-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .category-count {
+      font-size: 0.85rem;
+      color: var(--text-tertiary);
+    }
+
+    main .list li.is-active .category-link {
+      background: rgba(0, 102, 204, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(0, 102, 204, 0.18);
+    }
+
+    main .list li.is-active .category-name,
+    main .list li.is-active .category-count {
+      color: var(--accent-color);
+    }
+
+    .category-meta {
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .category-posts {
+      margin-top: 48px;
+    }
+
+    .category-posts-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .category-posts-header h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .category-posts-header p {
+      margin-top: 6px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .post-list {
+      list-style: none;
+      margin-top: 20px;
+      padding: 0;
+    }
+
+    .post-list li {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .post-list time {
+      flex-shrink: 0;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-right: 10px;
+    }
+
+    .post-list a {
+      text-decoration: none;
+      color: #0070f3;
+    }
+
+    .post-list a:hover {
+      color: var(--accent-color);
+    }
+
+    .post-empty {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <header></header>
+  <main>
+    <h1>所有分类</h1>
+    <div class="list">
+      <ul id="categoryList"></ul>
+    </div>
+
+    <section class="category-posts">
+      <div class="category-posts-header">
+        <h2 id="postsTitle"></h2>
+        <p id="postsDescription"></p>
+      </div>
+      <ul class="post-list" id="postList"></ul>
+      <p class="post-empty" id="postEmpty" hidden>这个分类还没有文章，敬请期待。</p>
+    </section>
+  </main>
+  <footer></footer>
+  <script src="./js/components.js"></script>
+  <script>
+    const categories = [
+      {
+        id: "tech",
+        name: "技术",
+        icon: "💻",
+        description: "编程、开发、技术分享",
+        posts: [
+          { title: "全栈开发实战：使用 React、Node.js 和 Express 构建实时聊天应用", date: "2025-01-01", url: "#" },
+          { title: "告别回调地狱：掌握 Node.js 的 Promise 与 Async/Await", date: "2025-01-08", url: "#" },
+          { title: "React 性能优化：memo、useMemo 与 useCallback 的使用场景", date: "2025-01-11", url: "#" }
+        ]
+      },
+      {
+        id: "design",
+        name: "设计",
+        icon: "🎨",
+        description: "UI / UX、视觉设计",
+        posts: [
+          { title: "设计系统 2.0：从组件到视觉语言的落地实践", date: "2025-02-01", url: "#" }
+        ]
+      },
+      {
+        id: "life",
+        name: "生活",
+        icon: "🌱",
+        description: "生活感悟、个人思考",
+        posts: [
+          { title: "iOS 内嵌 H5 解析 JSON 的那些坑", date: "2025-01-16", url: "#" }
+        ]
+      },
+      {
+        id: "study",
+        name: "学习",
+        icon: "📚",
+        description: "学习笔记、知识分享",
+        posts: []
+      }
+    ];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const categoryListEl = document.getElementById("categoryList");
+      const postsTitleEl = document.getElementById("postsTitle");
+      const postsDescriptionEl = document.getElementById("postsDescription");
+      const postListEl = document.getElementById("postList");
+      const postEmptyEl = document.getElementById("postEmpty");
+
+      let activeCategoryId = categories[0]?.id ?? null;
+
+      function setActiveCategory(categoryId) {
+        if (activeCategoryId === categoryId) return;
+        activeCategoryId = categoryId;
+        renderCategories();
+        renderPosts();
+      }
+
+      function renderCategories() {
+        categoryListEl.innerHTML = "";
+        const fragment = document.createDocumentFragment();
+
+        categories.forEach((category) => {
+          const item = document.createElement("li");
+          if (category.id === activeCategoryId) {
+            item.classList.add("is-active");
+          }
+
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "category-link";
+          button.setAttribute("data-category-id", category.id);
+          button.setAttribute("aria-pressed", category.id === activeCategoryId ? "true" : "false");
+          button.innerHTML = `
+            <span class="category-icon" aria-hidden="true">${category.icon}</span>
+            <div class="category-content">
+              <div class="category-head">
+                <span class="category-name">${category.name}</span>
+                <span class="category-count">${category.posts.length} 篇</span>
+              </div>
+              <div class="category-meta">${category.description}</div>
+            </div>
+          `;
+          button.addEventListener("click", () => setActiveCategory(category.id));
+
+          item.appendChild(button);
+          fragment.appendChild(item);
+        });
+
+        categoryListEl.appendChild(fragment);
+      }
+
+      function renderPosts() {
+        const activeCategory = categories.find((category) => category.id === activeCategoryId);
+        if (!activeCategory) return;
+
+        postsTitleEl.textContent = `分类：${activeCategory.name}`;
+        postsDescriptionEl.textContent = `${activeCategory.posts.length} 篇文章`;
+
+        postListEl.innerHTML = "";
+
+        if (activeCategory.posts.length === 0) {
+          postEmptyEl.hidden = false;
+          return;
+        }
+
+        postEmptyEl.hidden = true;
+        const fragment = document.createDocumentFragment();
+
+        activeCategory.posts.forEach((post) => {
+          const item = document.createElement("li");
+
+          const timeEl = document.createElement("time");
+          timeEl.setAttribute("datetime", post.date);
+          timeEl.textContent = post.date;
+
+          const linkEl = document.createElement("a");
+          linkEl.href = post.url;
+          linkEl.textContent = post.title;
+
+          item.append(timeEl, linkEl);
+          fragment.appendChild(item);
+        });
+
+        postListEl.appendChild(fragment);
+      }
+
+      renderCategories();
+      renderPosts();
+    });
+  </script>
+</body>
+
+</html>
